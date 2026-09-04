@@ -167,7 +167,7 @@ body.authLocked footer{display:none!important}
 
 .authScreen{min-height:100vh;display:grid;place-items:center;padding:30px 18px}
 .authBox{width:min(960px,100%);display:grid;grid-template-columns:1.1fr .9fr;gap:0;overflow:hidden;border-radius:28px;background:#fff;box-shadow:0 25px 70px rgba(0,0,0,.3)}
-.authIntro{padding:48px;background:linear-gradient(rgba(200, 50, 30, 0.78), rgba(210, 70, 20, 0.82)), url('pizza-pattern.jpg') center/cover no-repeat;color:#fff;display:flex;flex-direction:column;justify-content:center}
+.authIntro{padding:48px;background:linear-gradient(rgba(200, 50, 30, 0.78), rgba(210, 70, 20, 0.82)), url('pic 1.jpg') center/cover no-repeat;color:#fff;display:flex;flex-direction:column;justify-content:center}
 .authIntro h1{font-size:42px;line-height:1.05;margin:0 0 14px}
 .authIntro p{opacity:.95;line-height:1.7;max-width:310px;font-size:15px}
 .pizzaHeroBadge{margin-top:20px;display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.2);backdrop-filter:blur(8px);padding:8px 16px;border-radius:99px;font-weight:800;font-size:14px;width:fit-content}
@@ -497,8 +497,6 @@ body.authLocked footer{display:none!important}
 <div class="toast" id="toast"></div>
 
 <script>
-localStorage.removeItem("placedOrder");
-
 let activeGatewayType = "GrabPay";
 let globalPizzaQty = 0; 
 
@@ -596,8 +594,6 @@ function updatePizzaCart(){
 
   const noteVal = document.getElementById("instr").value.trim();
   document.getElementById("noteTextPreview").textContent = noteVal ? noteVal : "None specified";
-
-  store.set("activeOrder", o);
 }
 
 function togglePaymentBox(){
@@ -651,9 +647,12 @@ function goToCheckoutView(){
 
 function tryShowTrackingPage(){
   if(!store.get("placedOrder", false)){
-    showToast("it's still empty.");
+    showToast("Wala ka pang active order! Mag-order muna sa builder.");
     return;
   }
+  
+  loadSavedReceiptToUI();
+
   document.getElementById("builderSection").classList.add("hidden");
   document.getElementById("checkoutViewSection").classList.add("hidden");
   document.getElementById("checkoutSection").classList.remove("hidden");
@@ -663,6 +662,10 @@ function tryShowTrackingPage(){
 }
 
 function resetAndOrderAnother(){
+  store.remove("placedOrder");
+  store.remove("savedReceiptData");
+
+  // Reset all builder choices and make quantity 0 (brand new cart slate)
   document.querySelectorAll('input[type="checkbox"]').forEach(c => c.checked = false);
   globalPizzaQty = 0;
   document.getElementById("medium").checked = true;
@@ -670,9 +673,6 @@ function resetAndOrderAnother(){
   document.querySelector('input[name="pay"][value="Cash on Delivery"]').checked = true;
   document.getElementById("instr").value = "";
   document.getElementById("checkoutErr").textContent = "";
-
-  store.remove("placedOrder");
-  store.remove("receiptNo");
 
   togglePaymentBox();
   updatePizzaCart();
@@ -684,11 +684,18 @@ function resetAndOrderAnother(){
 function openOrderApp(userObj){
   document.body.classList.remove("authLocked");
   document.getElementById("authScreen").classList.add("hidden");
+
+  // HINDI na namin binabalik ang lumang resibo/cart sa screen pag-login. 
+  // Naka-save lang ang profile ni user, pero laging fresh/zero ang cart para sa panibagong order!
+  globalPizzaQty = 0;
+  updatePizzaCart();
 }
 
 function logoutUser(){
   if(confirm('Are you sure you want to log out?')){
     store.remove("currentUser");
+    store.remove("placedOrder");
+    store.remove("savedReceiptData");
     document.body.classList.add("authLocked");
     document.getElementById("authScreen").classList.remove("hidden");
     document.getElementById("checkoutSection").classList.add("hidden");
@@ -697,6 +704,13 @@ function logoutUser(){
     showToast("Logged out successfully!");
   }
 }
+
+window.addEventListener("DOMContentLoaded", () => {
+  const activeUser = store.get("currentUser", null);
+  if(activeUser){
+    openOrderApp(activeUser);
+  }
+});
 
 document.querySelectorAll('input[name="size"],input[name="meat"],input[name="veg"],input[name="addon"],input[name="slot"]').forEach(x => {
   x.addEventListener("change", () => {
@@ -754,6 +768,7 @@ document.getElementById("login").addEventListener("submit", e => {
     addr: "Delivery Address"
   });
   savedUser.email = emailInput;
+  store.set("currentUser", savedUser);
 
   showToast("Welcome back, " + (savedUser.name || "Customer") + "!");
   setTimeout(() => openOrderApp(savedUser), 400);
@@ -768,7 +783,7 @@ document.getElementById("toCheckout").addEventListener("click", () => {
     return;
   }
   if(globalPizzaQty <= 0){
-    err.textContent = "Wala pang laman ang iyong cart. Pumili muna ng pizza.";
+    err.textContent = "it's still empty.";
     return;
   }
   err.textContent = "";
@@ -825,32 +840,24 @@ function processFinalOrder(paymentStatusText, settlementText){
 
   const o = readOrder();
   const receiptNo = `PCH-${Date.now().toString().slice(-6)}`;
+  const orderDateStr = new Date().toLocaleString("en-PH", {dateStyle:"medium", timeStyle:"short"});
   
-  store.set("receiptNo", receiptNo);
+  const orderReceiptData = {
+    receiptNo,
+    name,
+    phone,
+    addr,
+    notes,
+    paymentStatusText,
+    settlementText,
+    dateStr: orderDateStr,
+    orderObj: o
+  };
+
   store.set("placedOrder", true);
+  store.set("savedReceiptData", orderReceiptData);
 
-  document.getElementById("receiptNo").textContent = receiptNo;
-  document.getElementById("receiptName").textContent = name;
-  document.getElementById("receiptPhone").textContent = phone;
-  document.getElementById("receiptDate").textContent = new Date().toLocaleString("en-PH", {dateStyle:"medium", timeStyle:"short"});
-  document.getElementById("receiptPay").textContent = paymentStatusText;
-  document.getElementById("receiptSettlement").textContent = settlementText;
-  document.getElementById("receiptAddress").textContent = addr;
-  document.getElementById("receiptNotes").textContent = notes;
-  document.getElementById("estDeliveryTime").textContent = o.slotLabel;
-
-  document.getElementById("receiptBase").textContent = peso(o.base);
-  document.getElementById("receiptExtras").textContent = peso(o.extrasSum);
-  document.getElementById("receiptFee").textContent = peso(o.fee);
-  document.getElementById("receiptTotal").textContent = peso(o.total);
-
-  let toppingsDescStr = o.toppingsNames.length > 0 ? `(${o.toppingsNames.join(", ")})` : "";
-  let receiptItemsHTML = `<div class="receiptItem"><span>${o.globalPizzaQty}x ${o.sizeLabel} Pizza Crust ${toppingsDescStr}</span><strong>${peso(o.base + o.extrasSum)}</strong></div>`;
-  document.getElementById("receiptItems").innerHTML = receiptItemsHTML;
-
-  const encodedAddress = encodeURIComponent(addr);
-  document.getElementById("googleMapFrame").src = `https://maps.google.com/maps?q=${encodedAddress}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
-  document.getElementById("mapLocationLabel").innerHTML = "<strong>Delivery Destination:</strong> " + addr;
+  loadSavedReceiptToUI();
 
   document.getElementById("builderSection").classList.add("hidden");
   document.getElementById("checkoutViewSection").classList.add("hidden");
@@ -860,6 +867,34 @@ function processFinalOrder(paymentStatusText, settlementText){
   
   window.scrollTo({top:0, behavior:"smooth"});
   showToast("Order placed! Redirected to tracking screen.");
+}
+
+function loadSavedReceiptToUI(){
+  const data = store.get("savedReceiptData", null);
+  if(!data) return;
+
+  document.getElementById("receiptNo").textContent = data.receiptNo;
+  document.getElementById("receiptName").textContent = data.name;
+  document.getElementById("receiptPhone").textContent = data.phone;
+  document.getElementById("receiptDate").textContent = data.dateStr;
+  document.getElementById("receiptPay").textContent = data.paymentStatusText;
+  document.getElementById("receiptSettlement").textContent = data.settlementText;
+  document.getElementById("receiptAddress").textContent = data.addr;
+  document.getElementById("receiptNotes").textContent = data.notes;
+  document.getElementById("estDeliveryTime").textContent = data.orderObj.slotLabel;
+
+  document.getElementById("receiptBase").textContent = peso(data.orderObj.base);
+  document.getElementById("receiptExtras").textContent = peso(data.orderObj.extrasSum);
+  document.getElementById("receiptFee").textContent = peso(data.orderObj.fee);
+  document.getElementById("receiptTotal").textContent = peso(data.orderObj.total);
+
+  let toppingsDescStr = data.orderObj.toppingsNames.length > 0 ? `(${data.orderObj.toppingsNames.join(", ")})` : "";
+  let receiptItemsHTML = `<div class="receiptItem"><span>${data.orderObj.globalPizzaQty}x ${data.orderObj.sizeLabel} Pizza Crust ${toppingsDescStr}</span><strong>${peso(data.orderObj.base + data.orderObj.extrasSum)}</strong></div>`;
+  document.getElementById("receiptItems").innerHTML = receiptItemsHTML;
+
+  const encodedAddress = encodeURIComponent(data.addr);
+  document.getElementById("googleMapFrame").src = `https://maps.google.com/maps?q=${encodedAddress}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
+  document.getElementById("mapLocationLabel").innerHTML = "<strong>Delivery Destination:</strong> " + data.addr;
 }
 </script>
 </body>
