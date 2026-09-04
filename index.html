@@ -17,9 +17,9 @@ body{
   margin:0;
   font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   color:var(--dark);
-  background-image: url('pic 1.jpg');
+  background-image: url('pizza-pattern.jpg');
   background-repeat: repeat;
-  background-size: 380px auto;
+  background-size: 420px auto;
   background-attachment: fixed;
   background-color: #fca311;
 }
@@ -71,7 +71,7 @@ a{text-decoration:none;color:inherit}
 .check input{accent-color:var(--red);width:16px;height:16px}
 .price{color:var(--red);font-weight:850;font-size:13px;margin-left:auto}
 
-/* KIOSK SUMMARY CARD DESIGN (CART/CHECKOUT VIEW) */
+/* KIOSK SUMMARY CARD DESIGN */
 .summaryCard{background:#fff;border:1px solid var(--line);border-radius:22px;padding:0;box-shadow:0 10px 35px rgba(0,0,0,.15);overflow:hidden;margin-top:10px}
 .summaryHeader{background:var(--dark);color:#fff;padding:16px 22px;display:flex;justify-content:space-between;align-items:center}
 .summaryHeader h2{margin:0;font-size:16px;letter-spacing:0.5px;text-transform:uppercase}
@@ -112,7 +112,7 @@ textarea{min-height:80px;resize:vertical}
 .paymentBox{background:#fff0e8;border:1px solid #f2cfbd;border-radius:16px;padding:18px;margin-top:12px;font-size:13px;line-height:1.6}
 .paymentBox strong{color:var(--red)}
 
-/* SECURE MODAL POPUP */
+/* MODAL POPUP */
 .modalOverlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);backdrop-filter:blur(5px);z-index:200;display:grid;place-items:center;padding:20px}
 .modalBox{width:min(460px,100%);background:#fff;border-radius:24px;padding:28px;box-shadow:0 25px 60px rgba(0,0,0,.3);animation:modalPop .3s ease}
 @keyframes modalPop{from{transform:scale(0.9);opacity:0}to{transform:scale(1);opacity:1}}
@@ -123,9 +123,8 @@ textarea{min-height:80px;resize:vertical}
 .gatewayTabs button{border:0;background:transparent;padding:10px;border-radius:10px;font-weight:800;font-size:13.5px;cursor:pointer}
 .gatewayTabs button.active{background:#fff;color:var(--red);box-shadow:0 2px 8px rgba(0,0,0,.08)}
 
-/* LIVE TRACKING UI */
+/* TRACKING UI */
 .trackingGrid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;margin-top:10px}
-
 .progressContainer{display:flex;justify-content:space-between;align-items:center;position:relative;margin:25px 15px 30px}
 .progressLine{position:absolute;top:50%;left:0;right:0;height:4px;background:#e2e8f0;z-index:1;transform:translateY(-50%)}
 .progressLineActive{position:absolute;top:50%;left:0;width:50%;height:4px;background:var(--green);z-index:2;transform:translateY(-50%)}
@@ -139,7 +138,7 @@ textarea{min-height:80px;resize:vertical}
 .mapImageWrapper iframe{width:100%;height:100%;border:0;display:block}
 .addressBox{padding:16px;font-size:14px;line-height:1.6;background:#fff;border-top:1px solid #e2e8f0}
 
-/* RECEIPT DISPLAY */
+/* RECEIPT */
 .receiptCard{background:#fff;border:1px dashed #cbd5e1;border-radius:18px;padding:22px;position:relative}
 .receiptHead{text-align:center;border-bottom:1px dashed #cbd5e1;padding-bottom:15px;margin-bottom:15px}
 .receiptHead h3{margin:0;font-size:22px;letter-spacing:-0.5px}
@@ -161,14 +160,14 @@ footer p{color:#bdb2ac;margin:7px 0;font-size:14px}
 .toast{position:fixed;right:20px;bottom:20px;background:var(--dark);color:#fff;padding:13px 18px;border-radius:13px;box-shadow:var(--shadow);transform:translateY(120px);opacity:0;transition:.3s;z-index:100;font-weight:750;font-size:14px}
 .toast.show{transform:translateY(0);opacity:1}
 
-/* AUTHENTICATION SCREEN */
+/* AUTHENTICATION */
 body.authLocked .topbar,
 body.authLocked main,
 body.authLocked footer{display:none!important}
 
 .authScreen{min-height:100vh;display:grid;place-items:center;padding:30px 18px}
 .authBox{width:min(960px,100%);display:grid;grid-template-columns:1.1fr .9fr;gap:0;overflow:hidden;border-radius:28px;background:#fff;box-shadow:0 25px 70px rgba(0,0,0,.3)}
-.authIntro{padding:48px;background:linear-gradient(rgba(200, 50, 30, 0.78), rgba(210, 70, 20, 0.82)), url('pic 1.jpg') center/cover no-repeat;color:#fff;display:flex;flex-direction:column;justify-content:center}
+.authIntro{padding:48px;background:linear-gradient(rgba(200, 50, 30, 0.78), rgba(210, 70, 20, 0.82)), url('pizza-pattern.jpg') center/cover no-repeat;color:#fff;display:flex;flex-direction:column;justify-content:center}
 .authIntro h1{font-size:42px;line-height:1.05;margin:0 0 14px}
 .authIntro p{opacity:.95;line-height:1.7;max-width:310px;font-size:15px}
 .pizzaHeroBadge{margin-top:20px;display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.2);backdrop-filter:blur(8px);padding:8px 16px;border-radius:99px;font-weight:800;font-size:14px;width:fit-content}
@@ -202,7 +201,7 @@ body.authLocked footer{display:none!important}
         <button id="loginTab">Log In</button>
       </div>
 
-      <!-- SIGN UP FORM (BLANK / CUSTOMER INPUTS) -->
+      <!-- SIGN UP FORM -->
       <form id="signup" class="form">
         <label class="field">Full Name<input required name="user" type="text" placeholder="Enter your full name"></label>
         <label class="field">Email<input required name="email" type="email" placeholder="Enter your email"></label>
@@ -228,7 +227,7 @@ body.authLocked footer{display:none!important}
 <header class="topbar">
   <div class="navwrap">
     <a class="brand" href="javascript:void(0)" onclick="showBuilderPage()">
-      <div class="logoMark"><img src="Screenshot_2026-09-04_195221-removebg-preview.png" alt="Picha Pie Logo"></div>
+      <div class="logoMark"><img src="pizza-logo.png" alt="Picha Pie Logo"></div>
       <div>
         <div class="logoText">Picha Pie</div>
         <div class="tagline">Make your own PIZZA!!!</div>
@@ -249,7 +248,7 @@ body.authLocked footer{display:none!important}
 
 <main class="container">
 
-  <!-- PAGE 1: ORDER PIZZA (STEPS 1 TO 6) -->
+  <!-- PAGE 1: ORDER PIZZA -->
   <div id="builderSection">
     <div class="sectionHead">
       <div>
@@ -320,13 +319,11 @@ body.authLocked footer{display:none!important}
         </div>
       </div>
 
-      <!-- STEP 6: DELIVERY NOTES / SPECIAL INSTRUCTIONS -->
       <div class="step">
         <div class="stepTitle"><div class="num">6</div><h3>Delivery Notes & Special Instructions</h3></div>
         <label class="field">Instructions for Rider<textarea id="instr" placeholder="e.g. Leave at gate, call upon arrival"></textarea></label>
       </div>
 
-      <!-- NEXT BUTTON TO CART -->
       <button class="primary full" onclick="goToCheckoutView()">Next: View Order Summary & Cart →</button>
     </div>
   </div>
@@ -365,7 +362,7 @@ body.authLocked footer{display:none!important}
     </section>
   </div>
 
-  <!-- PAGE 3: TRACK ORDER & WAITING TIME SCREEN -->
+  <!-- PAGE 3: TRACK ORDER -->
   <section id="checkoutSection" class="hidden">
     <div class="sectionHead">
       <div>
@@ -446,7 +443,7 @@ body.authLocked footer{display:none!important}
 
 </main>
 
-<!-- GRABPAY / CARD SECURE CHECKOUT MODAL -->
+<!-- GRABPAY / CARD MODAL -->
 <div id="onlinePaymentModal" class="modalOverlay hidden">
   <div class="modalBox">
     <div class="modalHead">
@@ -465,7 +462,6 @@ body.authLocked footer{display:none!important}
       <button id="tabCard" onclick="switchGatewayTab('Card')">Credit / Debit Card</button>
     </div>
 
-    <!-- GRABPAY FORM -->
     <div id="grabPayForm">
       <label class="field" style="margin-bottom:12px">Registered GrabPay Mobile No.
         <input type="tel" id="grabPhone" placeholder="09989019058">
@@ -475,7 +471,6 @@ body.authLocked footer{display:none!important}
       </label>
     </div>
 
-    <!-- CARD FORM -->
     <div id="cardForm" class="hidden">
       <label class="field" style="margin-bottom:10px">Card Number
         <input type="text" id="cardNumber" placeholder="4111 2222 3333 4444">
@@ -727,7 +722,6 @@ document.getElementById("loginTab").addEventListener("click", () => {
   document.getElementById("authTitle").textContent = "Welcome back";
 });
 
-// SIGN UP (DYNAMIC INPUTS STORED SAFELY)
 document.getElementById("signup").addEventListener("submit", e => {
   e.preventDefault();
   const fd = new FormData(e.target);
@@ -747,7 +741,6 @@ document.getElementById("signup").addEventListener("submit", e => {
   setTimeout(() => openOrderApp(newUser), 400);
 });
 
-// LOGIN
 document.getElementById("login").addEventListener("submit", e => {
   e.preventDefault();
   const err = document.getElementById("loginErr");
@@ -766,7 +759,6 @@ document.getElementById("login").addEventListener("submit", e => {
   setTimeout(() => openOrderApp(savedUser), 400);
 });
 
-// MAIN PLACE ORDER TRIGGER FROM CART/CHECKOUT VIEW
 document.getElementById("toCheckout").addEventListener("click", () => {
   const currentUser = store.get("currentUser", null);
   const err = document.getElementById("checkoutErr");
