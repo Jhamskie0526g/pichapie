@@ -6,9 +6,9 @@
 <title>Picha Pie</title>
 <style>
 :root{
-  --red:#e63946;--red2:#ff5964;--yellow:#ffd166;--cream:#fff8ed;
-  --dark:#17120f;--brown:#2a1d17;--muted:#8e8179;--line:#eadfd5;
-  --white:#fff;--green:#2a9d8f;--shadow:0 18px 50px rgba(58,36,22,.12);
+  --red:#d62828;--yellow:#f77f00;--cream:#fff8ed;
+  --dark:#17120f;--muted:#8e8179;--line:#eadfd5;
+  --white:#fff;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -17,83 +17,80 @@ body{
   margin:0;
   font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   color:var(--dark);
-  background-color: #f77f00;
-  background-image: radial-gradient(#fcbf49 15%, transparent 16%), radial-gradient(#d62828 15%, transparent 16%);
-  background-size: 60px 60px;
-  background-position: 0 0, 30px 30px;
+  background-color:#faf6f0;
 }
 
 button,input{font:inherit}
 button{cursor:pointer}
 a{text-decoration:none;color:inherit}
 
-.topbar{position:sticky;top:0;z-index:50;background:rgba(255,250,245,.95);backdrop-filter:blur(14px);border-bottom:1px solid rgba(234,223,213,.8)}
-.navwrap{max-width:1180px;margin:auto;padding:15px 22px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-.brand{display:flex;align-items:center;gap:11px}
-.logoMark{width:43px;height:43px;border-radius:14px;background:var(--red);display:grid;place-items:center;color:#fff;font-size:24px;box-shadow:0 8px 20px rgba(230,57,70,.25)}
-.logoText{font-weight:950;font-size:20px;line-height:1}
+.topbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line)}
+.navwrap{max-width:1100px;margin:auto;padding:15px 20px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:10px}
+.logoMark{width:40px;height:40px;border-radius:10px;background:var(--red);display:grid;place-items:center;color:#fff;font-size:22px}
+.logoText{font-weight:900;font-size:20px;line-height:1}
 .logoText span{color:var(--red)}
-.tagline{font-size:11px;color:#9b6d28;font-weight:800;margin-top:4px}
+.tagline{font-size:11px;color:var(--muted);font-weight:700;margin-top:3px}
 .nav{display:flex;gap:6px;align-items:center}
-.nav a{padding:10px 13px;border-radius:12px;font-weight:750;color:#5e5149}
+.nav a{padding:8px 12px;border-radius:8px;font-weight:700;color:#5e5149}
 .nav a:hover,.nav a.active{background:#fff0e8;color:var(--red)}
 .actions{display:flex;align-items:center;gap:10px}
-.cartBtn{border:0;background:var(--dark);color:#fff;padding:11px 15px;border-radius:13px;font-weight:850}
-.cartBtn span{background:var(--red);padding:3px 7px;border-radius:99px;margin-left:5px}
-.logoutBtn{border:1px solid var(--red);background:transparent;color:var(--red);padding:10px 14px;border-radius:13px;font-weight:800;transition:.2s}
+.cartBtn{border:0;background:var(--dark);color:#fff;padding:10px 14px;border-radius:10px;font-weight:800}
+.cartBtn span{background:var(--red);padding:2px 6px;border-radius:99px;margin-left:4px}
+.logoutBtn{border:1px solid var(--red);background:transparent;color:var(--red);padding:9px 13px;border-radius:10px;font-weight:800;transition:.2s}
 .logoutBtn:hover{background:var(--red);color:#fff}
 
-.container{max-width:1180px;margin:auto;padding:25px 22px 70px}
-.sectionHead{display:flex;align-items:end;justify-content:space-between;gap:20px;margin:20px 0;background:rgba(255,255,255,0.95);padding:15px 20px;border-radius:16px}
-.sectionHead h2{font-size:32px;margin:0;letter-spacing:-1px}
-.sectionHead p{margin:5px 0 0;color:var(--muted)}
+.container{max-width:1100px;margin:auto;padding:25px 20px 60px}
+.sectionHead{display:flex;align-items:end;justify-content:space-between;gap:20px;margin:15px 0 25px;background:#fff;padding:15px 20px;border-radius:12px;border:1px solid var(--line)}
+.sectionHead h2{font-size:26px;margin:0}
+.sectionHead p{margin:4px 0 0;color:var(--muted)}
 
-.builder{display:grid;grid-template-columns:1fr 370px;gap:20px;align-items:start}
-.card{background:rgba(255,255,255,0.95);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 10px 35px rgba(58,36,22,.1)}
-.step{margin-bottom:25px}
+.builder{display:grid;grid-template-columns:1fr 340px;gap:20px;align-items:start}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 4px 15px rgba(0,0,0,.03)}
+.step{margin-bottom:22px}
 .step:last-child{margin-bottom:0}
-.stepTitle{display:flex;align-items:center;gap:10px;margin-bottom:13px}
-.num{width:30px;height:30px;border-radius:10px;background:#fff0e8;color:var(--red);display:grid;place-items:center;font-weight:950}
-.stepTitle h3{margin:0;font-size:18px}
+.stepTitle{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.num{width:26px;height:26px;border-radius:8px;background:#fff0e8;color:var(--red);display:grid;place-items:center;font-weight:900;font-size:14px}
+.stepTitle h3{margin:0;font-size:16px}
 .choiceGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .choice{position:relative}
 .choice input{position:absolute;opacity:0}
-.choice label{display:block;border:1px solid var(--line);padding:14px;border-radius:15px;background:#fff;transition:.2s;height:100%}
-.choice input:checked+label{border-color:var(--red);background:#fff3ee;box-shadow:0 0 0 2px rgba(230,57,70,.08)}
-.choice label strong{display:block}
-.choice label small{color:var(--muted);display:block;margin-top:4px}
-.checkGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
-.check{display:flex;align-items:center;gap:9px;border:1px solid var(--line);padding:12px;border-radius:13px;background:#fff}
+.choice label{display:block;border:1px solid var(--line);padding:12px;border-radius:10px;background:#fff;transition:.2s;height:100%}
+.choice input:checked+label{border-color:var(--red);background:#fff3ee}
+.choice label strong{display:block;font-size:14px}
+.choice label small{color:var(--muted);display:block;margin-top:2px}
+.checkGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.check{display:flex;align-items:center;gap:8px;border:1px solid var(--line);padding:10px;border-radius:10px;background:#fff;font-size:14px}
 .check input{accent-color:var(--red)}
-.price{color:var(--red);font-weight:850;font-size:13px;margin-left:auto}
+.price{color:var(--red);font-weight:800;font-size:12px;margin-left:auto}
 
-.summary{position:sticky;top:86px}
+.summary{position:sticky;top:80px}
 .summaryTop{display:flex;justify-content:space-between;align-items:center}
-.summary h2{margin:0}
-.sumrow{display:flex;justify-content:space-between;padding:8px 0;color:#65584f}
-.sumrow.total{border-top:1px dashed var(--line);margin-top:7px;padding-top:15px;color:var(--dark);font-size:20px;font-weight:950}
-.extraTag{display:inline-block;background:#fff0e8;color:#9b6d28;font-size:12px;font-weight:800;padding:4px 9px;border-radius:999px;margin:0 5px 5px 0}
-.full{width:100%;margin-top:14px}
+.summary h2{margin:0;font-size:20px}
+.sumrow{display:flex;justify-content:space-between;padding:6px 0;color:#65584f;font-size:14px}
+.sumrow.total{border-top:1px dashed var(--line);margin-top:6px;padding-top:12px;color:var(--dark);font-size:18px;font-weight:900}
+.extraTag{display:inline-block;background:#fff0e8;color:#9b6d28;font-size:11px;font-weight:800;padding:3px 8px;border-radius:999px;margin:0 4px 4px 0}
+.full{width:100%;margin-top:12px}
 
-.form{display:grid;gap:12px}
-label.field{display:grid;gap:6px;font-size:13px;font-weight:800}
-input[type=text],input[type=email],input[type=password],textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff;color:var(--dark);outline:none}
-input:focus,textarea:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(230,57,70,.08)}
-textarea{min-height:80px;resize:vertical}
+.form{display:grid;gap:10px}
+label.field{display:grid;gap:5px;font-size:12px;font-weight:800}
+input[type=text],input[type=email],input[type=password],textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px;background:#fff;color:var(--dark);outline:none;font-size:14px}
+input:focus,textarea:focus{border-color:var(--red)}
+textarea{min-height:70px;resize:vertical}
 .hidden{display:none!important}
-.err{color:var(--red);font-size:13px;min-height:17px}
+.err{color:var(--red);font-size:12px;min-height:16px}
 
-.radioList{display:grid;gap:9px}
-.radio{border:1px solid var(--line);padding:12px;border-radius:13px;display:flex;gap:9px;align-items:center;background:#fff}
+.radioList{display:grid;gap:8px}
+.radio{border:1px solid var(--line);padding:10px;border-radius:10px;display:flex;gap:8px;align-items:center;background:#fff;font-size:14px}
 .radio input{accent-color:var(--red)}
-.success{background:#edf9f6;border:1px solid #c7ebe4;color:#1d746a;padding:14px;border-radius:13px;margin-top:12px}
+.success{background:#edf9f6;border:1px solid #c7ebe4;color:#1d746a;padding:12px;border-radius:10px;margin-top:10px;font-size:13px}
 
-footer{background:var(--dark);color:#fff;padding:35px 22px}
-.footerInner{max-width:1180px;margin:auto;display:flex;justify-content:space-between;gap:25px;flex-wrap:wrap}
-footer p{color:#bdb2ac;margin:7px 0}
-.footerBrand{font-size:20px;font-weight:950}.footerBrand span{color:var(--red2)}
+footer{background:var(--dark);color:#fff;padding:30px 20px;margin-top:40px}
+.footerInner{max-width:1100px;margin:auto;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:13px}
+footer p{color:#bdb2ac;margin:5px 0}
+.footerBrand{font-size:18px;font-weight:900}.footerBrand span{color:var(--red)}
 
-.toast{position:fixed;right:20px;bottom:20px;background:var(--dark);color:#fff;padding:13px 17px;border-radius:13px;box-shadow:var(--shadow);transform:translateY(120px);opacity:0;transition:.3s;z-index:100;font-weight:750}
+.toast{position:fixed;right:20px;bottom:20px;background:var(--dark);color:#fff;padding:12px 16px;border-radius:10px;box-shadow:0 10px 25px rgba(0,0,0,.2);transform:translateY(120px);opacity:0;transition:.3s;z-index:100;font-weight:700;font-size:13px}
 .toast.show{transform:translateY(0);opacity:1}
 
 body.authLocked .topbar,
@@ -104,84 +101,42 @@ body.authLocked footer{display:none!important}
   min-height:100vh;
   display:grid;
   place-items:center;
-  padding:30px 18px;
+  padding:20px;
+  background:#faf6f0;
 }
 
 .authBox{
-  width:min(980px,100%);
-  display:grid;
-  grid-template-columns:1.1fr .9fr;
-  gap:0;
-  overflow:hidden;
-  border-radius:28px;
+  width:min(420px,100%);
+  border-radius:16px;
   background:#fff;
-  box-shadow:0 25px 70px rgba(0,0,0,.35);
-  position:relative;
+  border:1px solid var(--line);
+  padding:30px;
+  box-shadow:0 10px 30px rgba(0,0,0,.05);
 }
 
-.authIntro{
-  padding:48px;
-  background: linear-gradient(135deg, rgba(217, 4, 41, 0.9), rgba(239, 35, 60, 0.85)), 
-              url('https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80');
-  background-size: cover;
-  background-position: center;
-  color:#fff;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  position:relative;
-  overflow:hidden;
-}
+.authBox h1{margin:0 0 5px;font-size:24px;text-align:center}
+.authBox p.sub{color:var(--muted);margin:0 0 20px;text-align:center;font-size:13px}
+.authTabs{display:grid;grid-template-columns:1fr 1fr;background:#faf6f0;padding:4px;border-radius:10px;margin-bottom:18px}
+.authTabs button{border:0;background:transparent;padding:9px;border-radius:8px;font-weight:800;cursor:pointer;font-size:13px}
+.authTabs button.active{background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.05)}
 
-.halfPizzaGraphic {
-  position: absolute;
-  top: 50%;
-  right: -120px;
-  transform: translateY(-50%);
-  width: 280px;
-  height: 280px;
-  border-radius: 50%;
-  background-image: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80');
-  background-size: cover;
-  background-position: center;
-  box-shadow: -10px 0 25px rgba(0,0,0,0.5);
-  border: 5px solid #fff;
-  pointer-events: none;
-}
+.receiptCard{background:#fff;border:1px dashed #ccc;border-radius:12px;padding:16px}
+.receiptHead{text-align:center;border-bottom:1px dashed #ccc;padding-bottom:10px;margin-bottom:10px}.receiptHead h3{margin:0;font-size:18px}.receiptHead p{margin:3px 0 0;color:var(--muted);font-size:11px}
+.receiptItem{display:flex;justify-content:space-between;gap:10px;margin:6px 0;font-size:13px}.receiptItem span:first-child{color:var(--muted)}
+.receiptTotal{border-top:1px dashed #ccc;margin-top:10px;padding-top:10px;display:flex;justify-content:space-between;font-size:16px;font-weight:900}
 
-.authIntro h1{font-size:42px;line-height:1.05;margin:0 0 14px;position:relative;z-index:2;text-shadow: 0 2px 10px rgba(0,0,0,0.4);}
-.authIntro p{opacity:.95;line-height:1.7;position:relative;z-index:2;max-width:280px;text-shadow: 0 1px 5px rgba(0,0,0,0.4);}
-
-.authFormBox{padding:38px;background:#fff;position:relative;z-index:2}
-.authFormBox h2{margin:0 0 7px}
-.authFormBox .muted{color:var(--muted);margin:0 0 22px}
-.authTabs{display:grid;grid-template-columns:1fr 1fr;background:#fff3e9;padding:5px;border-radius:12px;margin-bottom:20px}
-.authTabs button{border:0;background:transparent;padding:11px;border-radius:99px;font-weight:800;cursor:pointer}
-.authTabs button.active{background:#fff;box-shadow:0 3px 12px rgba(0,0,0,.08)}
-.flowNote{font-size:12px;color:var(--muted);margin-top:12px;text-align:center}
-
-.receiptCard{background:#fff;border:1px dashed #c8c8c8;border-radius:18px;padding:20px;position:relative}
-.receiptHead{text-align:center;border-bottom:1px dashed #ccc;padding-bottom:15px;margin-bottom:14px}.receiptHead h3{margin:0;font-size:21px}.receiptHead p{margin:5px 0 0;color:var(--muted);font-size:12px}
-.receiptItem{display:flex;justify-content:space-between;gap:15px;margin:9px 0;font-size:14px}.receiptItem span:first-child{color:var(--muted)}
-.receiptTotal{border-top:1px dashed #ccc;margin-top:14px;padding-top:14px;display:flex;justify-content:space-between;font-size:18px;font-weight:900}
-
-.googleMapBox{height:300px;border-radius:18px;overflow:hidden;border:1px solid #cfe0cb;margin-top:10px}
+.googleMapBox{height:250px;border-radius:12px;overflow:hidden;border:1px solid var(--line);margin-top:10px}
 .googleMapBox iframe{width:100%;height:100%;border:0}
 
-.lastPage{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;margin-top:25px}
+.lastPage{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;margin-top:20px}
 
-.primary{background:var(--red);color:#fff;border:0;padding:13px 20px;border-radius:13px;font-weight:850;transition:.2s}
-.primary:hover{background:#c92a37}
-.secondary{background:#fff;border:1px solid var(--line);padding:10px 16px;border-radius:12px;font-weight:750}
+.primary{background:var(--red);color:#fff;border:0;padding:11px 16px;border-radius:10px;font-weight:800;transition:.2s}
+.primary:hover{background:#b82020}
+.secondary{background:#fff;border:1px solid var(--line);padding:8px 14px;border-radius:8px;font-weight:700}
 
-@media(max-width:900px){
+@media(max-width:850px){
  .builder,.lastPage{grid-template-columns:1fr}
  .summary{position:static}
-}
-@media(max-width:760px){
- .authBox{grid-template-columns:1fr}
- .halfPizzaGraphic{display:none}
- .authIntro{padding:32px}.authIntro h1{font-size:34px}.authFormBox{padding:28px}
 }
 </style>
 </head>
@@ -189,37 +144,29 @@ body.authLocked footer{display:none!important}
 
 <section id="authScreen" class="authScreen">
   <div class="authBox">
-    <div class="authIntro">
-      <div class="halfPizzaGraphic"></div>
-      <h1>Welcome to<br>Picha Pie</h1>
-      <p>Make your own pizza, choose your toppings, and track your order!</p>
-      <div style="margin-top:18px;font-weight:800;position:relative;z-index:2">🔥 Fresh • Fast • Delicious</div>
-    </div>
-    <div class="authFormBox">
-      <h2 id="authTitle">Create your account</h2>
-      <p class="muted" id="authSubtitle">Sign up first to start your pizza order.</p>
-      <div class="authTabs">
-        <button class="active" id="signupTab">Sign Up</button>
-        <button id="loginTab">Log In</button>
-      </div>
+    <h1>🍕 Picha Pie</h1>
+    <p class="sub" id="authSubtitle">Sign up to start your pizza order.</p>
 
-      <form id="signup" class="form">
-        <label class="field">Name<input required name="user" type="text" placeholder="Your name"></label>
-        <label class="field">Email<input required name="email" type="email" placeholder="you@email.com"></label>
-        <label class="field">Password<input required name="password" type="password" placeholder="••••••••"></label>
-        <label class="field">Confirm password<input required name="confirm" type="password" placeholder="••••••••"></label>
-        <button class="primary full" type="submit">Create account →</button>
-        <div class="err" id="signupErr"></div>
-      </form>
-
-      <form id="login" class="form hidden">
-        <label class="field">Email<input required name="email" type="email" placeholder="you@email.com"></label>
-        <label class="field">Password<input required name="password" type="password" placeholder="••••••••"></label>
-        <button class="primary full" type="submit">Log in →</button>
-        <div class="err" id="loginErr"></div>
-      </form>
-      <p class="flowNote">Demo website — account details saved in browser.</p>
+    <div class="authTabs">
+      <button class="active" id="signupTab">Sign Up</button>
+      <button id="loginTab">Log In</button>
     </div>
+
+    <form id="signup" class="form">
+      <label class="field">Name<input required name="user" type="text" placeholder="Your name"></label>
+      <label class="field">Email<input required name="email" type="email" placeholder="you@email.com"></label>
+      <label class="field">Password<input required name="password" type="password" placeholder="••••••••"></label>
+      <label class="field">Confirm password<input required name="confirm" type="password" placeholder="••••••••"></label>
+      <button class="primary full" type="submit">Create Account →</button>
+      <div class="err" id="signupErr"></div>
+    </form>
+
+    <form id="login" class="form hidden">
+      <label class="field">Email<input required name="email" type="email" placeholder="you@email.com"></label>
+      <label class="field">Password<input required name="password" type="password" placeholder="••••••••"></label>
+      <button class="primary full" type="submit">Log In →</button>
+      <div class="err" id="loginErr"></div>
+    </form>
   </div>
 </section>
 
@@ -284,17 +231,17 @@ body.authLocked footer{display:none!important}
 
         <div class="step">
           <div class="stepTitle"><div class="num">5</div><h3>Delivery time & Payment</h3></div>
-          <div class="step" style="margin-bottom:15px">
-            <strong>Delivery Time</strong>
-            <div class="radioList" style="margin-top:8px">
+          <div class="step" style="margin-bottom:12px">
+            <strong style="font-size:13px">Delivery Time</strong>
+            <div class="radioList" style="margin-top:6px">
               <label class="radio"><input type="radio" name="slot" value="10–20 mins" data-fee="60"> 10–20 mins <span class="price">₱60</span></label>
               <label class="radio"><input type="radio" name="slot" value="20–35 mins" data-fee="45" checked> 20–35 mins <span class="price">₱45</span></label>
               <label class="radio"><input type="radio" name="slot" value="45 mins" data-fee="30"> 45 mins <span class="price">₱30</span></label>
             </div>
           </div>
           <div>
-            <strong>Mode of Payment</strong>
-            <div class="radioList" style="margin-top:8px">
+            <strong style="font-size:13px">Mode of Payment</strong>
+            <div class="radioList" style="margin-top:6px">
               <label class="radio"><input type="radio" name="pay" value="Cash on Delivery" checked> Cash on Delivery</label>
               <label class="radio"><input type="radio" name="pay" value="GCash"> GCash</label>
               <label class="radio"><input type="radio" name="pay" value="Maya"> Maya</label>
@@ -305,22 +252,22 @@ body.authLocked footer{display:none!important}
 
         <div class="step">
           <div class="stepTitle"><div class="num">6</div><h3>Delivery address</h3></div>
-          <label class="field">Address<textarea id="addr" placeholder="Enter your location/address"></textarea></label>
-          <label class="field" style="margin-top:10px">Instructions<textarea id="instr" placeholder="e.g. Leave at the gate"></textarea></label>
+          <label class="field">Address<textarea id="addr" placeholder="Enter your address"></textarea></label>
+          <label class="field" style="margin-top:8px">Instructions<textarea id="instr" placeholder="e.g. Leave at the gate"></textarea></label>
         </div>
       </section>
 
       <aside class="card summary">
         <div class="summaryTop"><h2>Your pizza</h2><span id="pizzaSize">Medium</span></div>
-        <div style="margin: 15px 0 10px;">
-          <small style="color:var(--muted);display:block;margin-bottom:5px;">Toppings & Add-ons:</small>
+        <div style="margin: 12px 0 8px;">
+          <small style="color:var(--muted);display:block;margin-bottom:4px;">Toppings & Add-ons:</small>
           <div id="extrasList"></div>
         </div>
         <div class="sumrow"><span>Base pizza</span><strong id="basePrice">₱299.00</strong></div>
         <div class="sumrow"><span>Extras</span><strong id="extrasPrice">₱0.00</strong></div>
         <div class="sumrow total"><span>Subtotal</span><strong id="subtotal">₱299.00</strong></div>
         <button class="primary full" id="toCheckout">Checkout & View Location →</button>
-        <div class="err" id="checkoutErr" style="margin-top:8px;text-align:center;"></div>
+        <div class="err" id="checkoutErr" style="margin-top:6px;text-align:center;"></div>
       </aside>
     </div>
   </div>
@@ -333,8 +280,8 @@ body.authLocked footer{display:none!important}
 
     <div class="lastPage" id="trackingView">
       <div class="card">
-        <h2>📍 Delivery Location Map</h2>
-        <p style="color:var(--muted)">Cubic Homes, Merville, Parañaque Area</p>
+        <h3>📍 Delivery Location Map</h3>
+        <p style="color:var(--muted);font-size:13px">Cubic Homes, Merville, Parañaque Area</p>
         
         <div class="googleMapBox">
           <iframe 
@@ -344,16 +291,16 @@ body.authLocked footer{display:none!important}
           </iframe>
         </div>
 
-        <div class="step" style="margin-top:20px">
+        <div class="step" style="margin-top:15px">
           <div class="stepTitle"><div class="num">✓</div><h3>Delivery details</h3></div>
-          <p id="finalAddress" style="margin:0 0 7px"></p>
-          <p id="finalInstructions" style="margin:0;color:var(--muted)"></p>
+          <p id="finalAddress" style="margin:0 0 5px;font-size:14px"></p>
+          <p id="finalInstructions" style="margin:0;color:var(--muted);font-size:13px"></p>
         </div>
       </div>
 
       <div class="card">
-        <h2>🧾 Order receipt</h2>
-        <div class="receiptCard" style="margin-top:18px">
+        <h3>🧾 Order receipt</h3>
+        <div class="receiptCard" style="margin-top:12px">
           <div class="receiptHead">
             <h3>PichaPie.com</h3>
             <p>ORDER RECEIPT</p>
@@ -368,7 +315,7 @@ body.authLocked footer{display:none!important}
         </div>
         <div class="success">
           🎉 <strong>Order placed successfully!</strong><br>
-          Your pizza order is now being processed.
+          Your order is now being processed.
         </div>
       </div>
     </div>
@@ -419,7 +366,7 @@ function updatePizza(){
   const allExtras=[...o.meatLabels,...o.vegLabels,...o.addonLabels];
   document.getElementById("extrasList").innerHTML=allExtras.length
     ? allExtras.map(x=>`<span class="extraTag">${x}</span>`).join("")
-    : `<span style="color:var(--muted);font-size:13px">No extras selected</span>`;
+    : `<span style="color:var(--muted);font-size:12px">No extras selected</span>`;
   document.getElementById("cartCount").textContent=allExtras.length;
   store.set("order",o);
 }
@@ -445,15 +392,13 @@ document.getElementById("signupTab").addEventListener("click",()=>{
   document.getElementById("loginTab").classList.remove("active");
   document.getElementById("signup").classList.remove("hidden");
   document.getElementById("login").classList.add("hidden");
-  document.getElementById("authTitle").textContent="Create your account";
-  document.getElementById("authSubtitle").textContent="Sign up first to start your pizza order.";
+  document.getElementById("authSubtitle").textContent="Sign up to start your pizza order.";
 });
 document.getElementById("loginTab").addEventListener("click",()=>{
   document.getElementById("loginTab").classList.add("active");
   document.getElementById("signupTab").classList.remove("active");
   document.getElementById("login").classList.remove("hidden");
   document.getElementById("signup").classList.add("hidden");
-  document.getElementById("authTitle").textContent="Welcome back 👋";
   document.getElementById("authSubtitle").textContent="Log in to continue your pizza order.";
 });
 
@@ -467,7 +412,7 @@ document.getElementById("signup").addEventListener("submit",e=>{
   store.set("user",{name:fd.get("user"),email:fd.get("email"),password:fd.get("password")});
   err.textContent="";
   e.target.reset();
-  showToast("Account created! Welcome!");
+  showToast("Account created!");
   setTimeout(openOrderPage,400);
 });
 
