@@ -13,7 +13,6 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 
-/* Seamless Pizza Pattern Background using SVG data URI */
 body{
   margin:0;
   font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
@@ -99,6 +98,17 @@ textarea{min-height:80px;resize:vertical}
 .radioList{display:grid;gap:9px}
 .radio{border:1px solid var(--line);padding:12px;border-radius:13px;display:flex;gap:9px;align-items:center;background:#fff}
 .radio input{accent-color:var(--red)}
+
+.paymentBox{
+  background:#fff0e8;
+  border:1px solid #f2cfbd;
+  border-radius:13px;
+  padding:15px;
+  margin-top:10px;
+  font-size:13px;
+}
+.paymentBox strong{color:var(--red)}
+
 .success{background:#edf9f6;border:1px solid #c7ebe4;color:#1d746a;padding:14px;border-radius:13px;margin-top:12px}
 
 footer{background:var(--dark);color:#fff;padding:35px 22px}
@@ -109,7 +119,6 @@ footer p{color:#bdb2ac;margin:7px 0}
 .toast{position:fixed;right:20px;bottom:20px;background:var(--dark);color:#fff;padding:13px 17px;border-radius:13px;box-shadow:var(--shadow);transform:translateY(120px);opacity:0;transition:.3s;z-index:100;font-weight:750}
 .toast.show{transform:translateY(0);opacity:1}
 
-/* FRONT PAGE / LOGIN STYLING */
 body.authLocked .topbar,
 body.authLocked main,
 body.authLocked footer{display:none!important}
@@ -147,7 +156,6 @@ body.authLocked footer{display:none!important}
   overflow:hidden;
 }
 
-/* Half Pizza Illustration on Front Page Side */
 .halfPizzaGraphic {
   position: absolute;
   top: 50%;
@@ -207,7 +215,7 @@ body.authLocked footer{display:none!important}
 </head>
 <body class="authLocked">
 
-<!-- FRONT PAGE / AUTH SCREEN WITH HALF PIZZA LOGO & PATTERN BACKGROUND -->
+<!-- FRONT PAGE / AUTH SCREEN -->
 <section id="authScreen" class="authScreen">
   <div class="authBox">
     <div class="authIntro">
@@ -253,7 +261,8 @@ body.authLocked footer{display:none!important}
     </nav>
     <div class="navActions">
       <button class="cartBtn" onclick="document.querySelector('#build').scrollIntoView()">🛒 Cart <span id="cartCount">0</span></button>
-      <button class="logoutBtn" onclick="logoutUser()">Log Out 🚪</button>
+      <!-- SIYA NALANG ANG Tanging Log Out Button -->
+      <button class="logoutBtn" onclick="logoutUser()">Log Out</button>
     </div>
   </div>
 </header>
@@ -316,10 +325,16 @@ body.authLocked footer{display:none!important}
           <div>
             <strong>Mode of Payment</strong>
             <div class="radioList" style="margin-top:8px">
-              <label class="radio"><input type="radio" name="pay" value="Cash on Delivery" checked> Cash on Delivery</label>
-              <label class="radio"><input type="radio" name="pay" value="GCash"> GCash</label>
-              <label class="radio"><input type="radio" name="pay" value="Maya"> Maya</label>
-              <label class="radio"><input type="radio" name="pay" value="Bank Transfer"> Bank Transfer</label>
+              <label class="radio"><input type="radio" name="pay" value="Cash on Delivery" checked onchange="togglePaymentBox()"> Cash on Delivery</label>
+              <label class="radio"><input type="radio" name="pay" value="Online Payment" onchange="togglePaymentBox()"> Online Payment</label>
+            </div>
+            <!-- Online Payment Details Box -->
+            <div id="onlinePayDetails" class="paymentBox hidden">
+              <strong>💳 Online Payment Details:</strong><br>
+              Send payment to:<br>
+              • <strong>GCash / Maya:</strong> 0969 000 6969 (Picha Pie Store)<br>
+              • <strong>Bank (BDO):</strong> 0012 3456 7890<br>
+              <small style="color:var(--muted);">*Please prepare screenshot of transaction upon delivery.</small>
             </div>
           </div>
         </div>
@@ -341,7 +356,6 @@ body.authLocked footer{display:none!important}
         <div class="sumrow"><span>Extras</span><strong id="extrasPrice">₱0.00</strong></div>
         <div class="sumrow total"><span>Subtotal</span><strong id="subtotal">₱299.00</strong></div>
         <button class="primary full" id="toCheckout">Checkout & View Location →</button>
-        <button class="logoutBtn full" onclick="logoutUser()" style="margin-top:8px">Log Out 🚪</button>
         <div class="err" id="checkoutErr" style="margin-top:8px;text-align:center;"></div>
       </aside>
     </div>
@@ -352,7 +366,6 @@ body.authLocked footer{display:none!important}
       <div><h2>Delivery Location 🚚</h2><p>Here is your delivery address map location.</p></div>
       <div style="display:flex;gap:8px">
         <button class="secondary" onclick="goBackToOrder()">← Back to Order</button>
-        <button class="logoutBtn" onclick="logoutUser()">Log Out 🚪</button>
       </div>
     </div>
 
@@ -396,7 +409,6 @@ body.authLocked footer{display:none!important}
           🎉 <strong>Order placed successfully!</strong><br>
           Your pizza order is now being processed.
         </div>
-        <button class="logoutBtn full" onclick="logoutUser()" style="margin-top:12px">Log Out 🚪</button>
       </div>
     </div>
   </section>
@@ -449,6 +461,16 @@ function updatePizza(){
     : `<span style="color:var(--muted);font-size:13px">No extras selected</span>`;
   document.getElementById("cartCount").textContent=allExtras.length;
   store.set("order",o);
+}
+
+function togglePaymentBox(){
+  const pay=document.querySelector('input[name="pay"]:checked')?.value;
+  const box=document.getElementById("onlinePayDetails");
+  if(pay === "Online Payment"){
+    box.classList.remove("hidden");
+  } else {
+    box.classList.add("hidden");
+  }
 }
 
 function openOrderPage(){
@@ -528,7 +550,6 @@ function renderFinalPage(){
   const receipt=store.get("receipt",null)||makeReceipt();
   store.set("receipt",receipt);
 
-  // Dynamic Google Maps connection based on user input
   const mapQuery = address ? encodeURIComponent(address) : "Cubic%20Homes,%20Merville,%20Paranaque";
   document.getElementById("mapIframe").src = `https://maps.google.com/maps?q=${mapQuery}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
   document.getElementById("mapLocationLabel").textContent = address || "Cubic Homes, Merville, Parañaque Area";
