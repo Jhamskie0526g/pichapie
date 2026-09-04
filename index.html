@@ -651,7 +651,7 @@ function goToCheckoutView(){
 
 function tryShowTrackingPage(){
   if(!store.get("placedOrder", false)){
-    showToast("Wala ka pang order! Tapusin muna ang builder at i-click ang Place Order.");
+    showToast("it's still empty.");
     return;
   }
   document.getElementById("builderSection").classList.add("hidden");
