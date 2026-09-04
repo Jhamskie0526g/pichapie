@@ -139,17 +139,10 @@ textarea{min-height:75px;resize:vertical}
   flex-shrink:0;
   text-align:center;
 }
-.qrBox img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  border-radius:8px;
-}
 
-/* LIVE RIDER & TRACKING SECTION */
+/* TRACKING & HCI STEPPER */
 .trackingGrid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;margin-top:10px}
 
-/* STEPPER BAR */
 .trackerSteps{display:flex;justify-content:space-between;position:relative;margin:25px 10px 30px}
 .trackerSteps::before{
   content:'';
@@ -405,7 +398,7 @@ body.authLocked footer{display:none!important}
               
               <div class="qrContainer">
                 <div class="qrBox">
-                  <!-- SVG GENERATED DUMMY QR CODE -->
+                  <!-- SVG PURE CODE QR ICON -->
                   <svg width="65" height="65" viewBox="0 0 24 24" fill="none" stroke="#1e293b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><path d="M14 14h3v3h-3z"></path><path d="M18 18h3v3h-3z"></path><path d="M14 18h1v3h-1z"></path></svg>
                 </div>
                 <div>
@@ -460,9 +453,9 @@ body.authLocked footer{display:none!important}
     </div>
 
     <div class="trackingGrid">
-      <!-- LEFT: LIVE MAP STATUS -->
+      <!-- LEFT: LIVE HCI TRACKER & MAP -->
       <div>
-        <!-- TRACKER STEPPER -->
+        <!-- PURE TEXT/CSS STEPPER (HCI PRINCIPLES ALIGNED) -->
         <div class="card" style="margin-bottom:20px;">
           <h3 style="margin:0 0 15px;font-size:17px;">Order Progress Status</h3>
           <div class="trackerSteps">
@@ -472,8 +465,8 @@ body.authLocked footer{display:none!important}
             <div class="tStep active"><div class="tDot">🛵</div><div class="tStepLabel">On the way</div></div>
             <div class="tStep"><div class="tDot">🏠</div><div class="tStepLabel">Delivered</div></div>
           </div>
-          <div style="background:#f8fafc;padding:12px;border-radius:12px;border:1px solid #e2e8f0;font-size:13px;color:#475569;">
-            ⏱ Estimated Arrival: <strong style="color:var(--dark);" id="estDeliveryTime">20–35 mins</strong>
+          <div style="background:#f8fafc;padding:12px 16px;border-radius:12px;border:1px solid #e2e8f0;font-size:14px;color:#475569;display:flex;align-items:center;gap:8px;">
+            <span>⏱</span> Estimated Arrival: <strong style="color:var(--dark);" id="estDeliveryTime">20–35 mins</strong>
           </div>
         </div>
 
