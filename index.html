@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Picha Pie - Order Pizza Online</title>
+<title>Picha Pie - Kiosk Order System</title>
 <style>
 :root{
   --red:#e63946;--yellow:#ffd166;--cream:#fff8ed;
@@ -60,7 +60,7 @@ a{text-decoration:none;color:inherit}
 .sectionHead h2{font-size:30px;margin:0;letter-spacing:-0.5px}
 .sectionHead p{margin:5px 0 0;color:var(--muted);font-size:14px}
 
-.builder{display:grid;grid-template-columns:1fr 380px;gap:22px;align-items:start}
+.builder{display:grid;grid-template-columns:1fr 400px;gap:22px;align-items:start}
 .card{background:rgba(255,255,255,0.96);border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:0 10px 35px rgba(58,36,22,.1)}
 .step{margin-bottom:25px}
 .step:last-child{margin-bottom:0}
@@ -80,16 +80,23 @@ a{text-decoration:none;color:inherit}
 .check input{accent-color:var(--red);width:16px;height:16px}
 .price{color:var(--red);font-weight:850;font-size:13px;margin-left:auto}
 
-/* CART SUMMARY SIDEBAR */
+/* MCDONALD'S KIOSK STYLE SUMMARY SIDEBAR */
 .summary{position:sticky;top:86px}
-.summaryTop{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:15px}
-.summary h2{margin:0;font-size:20px}
-.cartItemList{max-height:280px;overflow-y:auto;padding-right:5px;margin-bottom:15px}
-.cartItemRow{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px dashed var(--line);font-size:14px}
-.cartItemRow span.name{color:#4a3f37;font-weight:600}
-.cartItemRow span.amt{color:var(--dark);font-weight:750}
-.sumrow{display:flex;justify-content:space-between;padding:7px 0;color:#65584f;font-size:14px}
-.sumrow.total{border-top:2px solid var(--line);margin-top:8px;padding-top:14px;color:var(--dark);font-size:20px;font-weight:950}
+.summaryHeader{background:var(--dark);color:#fff;padding:14px 18px;border-radius:14px 14px 0 0;margin:-24px -24px 15px -24px;display:flex;justify-content:space-between;align-items:center}
+.summaryHeader h2{margin:0;font-size:16px;letter-spacing:0.5px;text-transform:uppercase}
+.summaryHeader span{background:var(--red);padding:3px 10px;border-radius:20px;font-size:12px;font-weight:800}
+
+.kioskItemList{max-height:280px;overflow-y:auto;margin-bottom:15px;display:grid;gap:8px}
+.kioskItem{display:flex;align-items:center;justify-content:space-between;background:#f8fafc;padding:10px 12px;border-radius:12px;border:1px solid #e2e8f0;font-size:13.5px}
+.kioskItem .qty{background:#e2e8f0;color:var(--dark);font-weight:800;padding:2px 7px;border-radius:6px;font-size:12px;margin-right:8px}
+.kioskItem .details{flex:1}
+.kioskItem .name{font-weight:700;color:var(--dark);display:block}
+.kioskItem .cost{font-weight:800;color:var(--red)}
+.kioskItem .removeBtn{background:transparent;border:0;color:#94a3b8;font-weight:900;font-size:16px;padding:4px 8px;border-radius:6px;margin-left:6px;transition:0.15s}
+.kioskItem .removeBtn:hover{color:var(--red);background:#fee2e2}
+
+.sumrow{display:flex;justify-content:space-between;padding:6px 0;color:#65584f;font-size:13.5px}
+.sumrow.total{border-top:2px dashed var(--line);margin-top:10px;padding-top:12px;color:var(--dark);font-size:20px;font-weight:950}
 .full{width:100%;margin-top:16px}
 
 /* FORM FIELDS */
@@ -97,7 +104,7 @@ a{text-decoration:none;color:inherit}
 label.field{display:grid;gap:6px;font-size:13px;font-weight:800;color:#4a3f37}
 input[type=text],input[type=email],input[type=password],textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff;color:var(--dark);outline:none;font-size:14px}
 input:focus,textarea:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(230,57,70,.1)}
-textarea{min-height:75px;resize:vertical}
+textarea{min-height:70px;resize:vertical}
 .hidden{display:none!important}
 .err{color:var(--red);font-size:13px;min-height:17px;font-weight:600}
 
@@ -105,7 +112,7 @@ textarea{min-height:75px;resize:vertical}
 .radio{border:1px solid var(--line);padding:12px 14px;border-radius:13px;display:flex;gap:10px;align-items:center;background:#fff;cursor:pointer;font-size:14px;font-weight:600}
 .radio input{accent-color:var(--red);width:16px;height:16px}
 
-/* BANKING BOX (CHECKOUT ONLY) */
+/* BANKING BOX */
 .paymentBox{
   background:#fff0e8;
   border:1px solid #f2cfbd;
@@ -117,48 +124,47 @@ textarea{min-height:75px;resize:vertical}
 }
 .paymentBox strong{color:var(--red)}
 
-/* TRACKING (PURE TEXT - NO PICTURES OR MAPS) */
+/* TRACKING (ZERO IMAGES - CLEAN TEXT BOXES ONLY) */
 .trackingGrid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;margin-top:10px}
 
-.trackerSteps{display:flex;justify-content:space-between;position:relative;margin:25px 20px 30px}
-.trackerSteps::before{
-  content:'';
-  position:absolute;
-  top:18px;
-  left:0;
-  right:0;
-  height:4px;
-  background:#e2e8f0;
-  z-index:1;
-}
-.trackerProgress{
-  position:absolute;
-  top:18px;
-  left:0;
-  width:50%;
-  height:4px;
-  background:var(--green);
-  z-index:1;
-  transition:width 0.5s ease;
-}
-.tStep{position:relative;z-index:2;text-align:center;background:#fff;padding:0 8px}
-.tDot{
-  width:36px;
-  height:36px;
-  border-radius:50%;
-  background:#e2e8f0;
-  color:#64748b;
+.pureTextStatusList{
   display:grid;
-  place-items:center;
-  margin:0 auto 8px;
-  font-weight:800;
-  font-size:14px;
-  border:3px solid #fff;
+  grid-template-columns:repeat(3, 1fr);
+  gap:12px;
+  margin:20px 0;
+  text-align:center;
 }
-.tStep.active .tDot{background:var(--green);color:#fff;box-shadow:0 0 0 4px rgba(42,157,143,0.2)}
-.tStep.done .tDot{background:var(--green);color:#fff}
-.tStepLabel{font-size:13px;font-weight:800;color:#64748b}
-.tStep.active .tStepLabel{color:var(--dark);font-weight:900}
+.statusBox{
+  padding:16px 12px;
+  border-radius:14px;
+  background:#f8fafc;
+  border:1px solid #e2e8f0;
+}
+.statusBox.done{
+  background:#f0fdf4;
+  border-color:#bbf7d0;
+}
+.statusBox.active{
+  background:#fff7ed;
+  border-color:#ffedd5;
+}
+.statusState{
+  display:block;
+  font-size:11px;
+  font-weight:800;
+  text-transform:uppercase;
+  margin-bottom:4px;
+  color:#64748b;
+}
+.statusBox.done .statusState{ color:#16a34a; }
+.statusBox.active .statusState{ color:#ea580c; }
+
+.statusName{
+  display:block;
+  font-size:14px;
+  font-weight:800;
+  color:var(--dark);
+}
 
 .addressBox{background:#f8fafc;padding:16px;border-radius:14px;border:1px solid #e2e8f0;margin-top:12px;font-size:14px;line-height:1.6;}
 
@@ -181,7 +187,7 @@ textarea{min-height:75px;resize:vertical}
 footer{background:var(--dark);color:#fff;padding:35px 22px;margin-top:40px}
 .footerInner{max-width:1180px;margin:auto;display:flex;justify-content:space-between;gap:25px;flex-wrap:wrap}
 footer p{color:#bdb2ac;margin:7px 0;font-size:14px}
-.footerBrand{font-size:20px;font-weight:950}.footerBrand span{color:var(--red2)}
+.footerBrand{font-size:20px;font-weight:950}
 
 .toast{position:fixed;right:20px;bottom:20px;background:var(--dark);color:#fff;padding:13px 18px;border-radius:13px;box-shadow:var(--shadow);transform:translateY(120px);opacity:0;transition:.3s;z-index:100;font-weight:750;font-size:14px}
 .toast.show{transform:translateY(0);opacity:1}
@@ -236,6 +242,7 @@ body.authLocked footer{display:none!important}
 @media(max-width:760px){
  .authBox{grid-template-columns:1fr}
  .authIntro{padding:32px}.authIntro h1{font-size:32px}.authFormBox{padding:28px}
+ .pureTextStatusList{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -292,7 +299,7 @@ body.authLocked footer{display:none!important}
     </nav>
     <div class="navActions">
       <button class="cartBtn" onclick="showBuilderPage()">
-        Cart <span id="cartCount">0</span>
+        Cart <span id="cartCount">1</span>
       </button>
       <button class="logoutBtn" onclick="logoutUser()">Log Out</button>
     </div>
@@ -301,17 +308,17 @@ body.authLocked footer{display:none!important}
 
 <main class="container">
 
-  <!-- PAGE 1: PIZZA BUILDER & FORM -->
+  <!-- PAGE 1: PIZZA BUILDER & MCDO KIOSK CART -->
   <div id="builderSection">
     <div class="sectionHead">
       <div>
         <h2>Build your pizza</h2>
-        <p>Pick your size, meats, and veggies. Cart updates automatically on the right.</p>
+        <p>Pick your size, meats, and veggies. Your kiosk order list updates automatically.</p>
       </div>
     </div>
 
     <div class="builder">
-      <!-- LEFT FORM -->
+      <!-- LEFT SELECTION FORM -->
       <section class="card">
         <div class="step">
           <div class="stepTitle"><div class="num">1</div><h3>Choose your size</h3></div>
@@ -325,28 +332,29 @@ body.authLocked footer{display:none!important}
         <div class="step">
           <div class="stepTitle"><div class="num">2</div><h3>Add your meats</h3></div>
           <div class="checkGrid">
-            <label class="check"><input type="checkbox" name="meat" value="Pepperoni" data-price="45"><span>Pepperoni</span><span class="price">+₱45</span></label>
-            <label class="check"><input type="checkbox" name="meat" value="Ham" data-price="40"><span>Ham</span><span class="price">+₱40</span></label>
-            <label class="check"><input type="checkbox" name="meat" value="Bacon" data-price="50"><span>Bacon</span><span class="price">+₱50</span></label>
-            <label class="check"><input type="checkbox" name="meat" value="Sausage" data-price="45"><span>Sausage</span><span class="price">+₱45</span></label>
+            <label class="check"><input type="checkbox" id="meat-pepperoni" name="meat" value="Pepperoni" data-price="45"><span>Pepperoni</span><span class="price">+₱45</span></label>
+            <label class="check"><input type="checkbox" id="meat-ham" name="meat" value="Ham" data-price="40"><span>Ham</span><span class="price">+₱40</span></label>
+            <label class="check"><input type="checkbox" id="meat-bacon" name="meat" value="Bacon" data-price="50"><span>Bacon</span><span class="price">+₱50</span></label>
+            <label class="check"><input type="checkbox" id="meat-sausage" name="meat" value="Sausage" data-price="45"><span>Sausage</span><span class="price">+₱45</span></label>
           </div>
         </div>
 
         <div class="step">
           <div class="stepTitle"><div class="num">3</div><h3>Load it with veggies</h3></div>
           <div class="checkGrid">
-            <label class="check"><input type="checkbox" name="veg" value="Mushrooms" data-price="25"><span>Mushrooms</span><span class="price">+₱25</span></label>
-            <label class="check"><input type="checkbox" name="veg" value="Onions" data-price="20"><span>Onions</span><span class="price">+₱20</span></label>
-            <label class="check"><input type="checkbox" name="veg" value="Bell Peppers" data-price="20"><span>Bell Peppers</span><span class="price">+₱20</span></label>
-            <label class="check"><input type="checkbox" name="veg" value="Olives" data-price="25"><span>Olives</span><span class="price">+₱25</span></label>
+            <label class="check"><input type="checkbox" id="veg-mushrooms" name="veg" value="Mushrooms" data-price="25"><span>Mushrooms</span><span class="price">+₱25</span></label>
+            <label class="check"><input type="checkbox" id="veg-onions" name="veg" value="Onions" data-price="20"><span>Onions</span><span class="price">+₱20</span></label>
+
+            <label class="check"><input type="checkbox" id="veg-peppers" name="veg" value="Bell Peppers" data-price="20"><span>Bell Peppers</span><span class="price">+₱20</span></label>
+            <label class="check"><input type="checkbox" id="veg-olives" name="veg" value="Olives" data-price="25"><span>Olives</span><span class="price">+₱25</span></label>
           </div>
         </div>
 
         <div class="step">
           <div class="stepTitle"><div class="num">4</div><h3>Extra add-ons</h3></div>
           <div class="checkGrid">
-            <label class="check"><input type="checkbox" name="addon" value="Extra Cheese" data-price="35"><span>Extra Cheese</span><span class="price">+₱35</span></label>
-            <label class="check"><input type="checkbox" name="addon" value="Extra Sauce" data-price="20"><span>Extra Sauce</span><span class="price">+₱20</span></label>
+            <label class="check"><input type="checkbox" id="addon-cheese" name="addon" value="Extra Cheese" data-price="35"><span>Extra Cheese</span><span class="price">+₱35</span></label>
+            <label class="check"><input type="checkbox" id="addon-sauce" name="addon" value="Extra Sauce" data-price="20"><span>Extra Sauce</span><span class="price">+₱20</span></label>
           </div>
         </div>
 
@@ -382,17 +390,20 @@ body.authLocked footer{display:none!important}
         </div>
       </section>
 
-      <!-- RIGHT SIDEBAR: CART SUMMARY -->
+      <!-- MCDONALD'S KIOSK STYLE SUMMARY SIDEBAR -->
       <aside class="card summary">
-        <div class="summaryTop">
-          <h2>Your Order Cart</h2>
-          <span id="pizzaSize" style="font-weight:800;color:var(--red);">Medium</span>
+        <div class="summaryHeader">
+          <h2>My Order Summary</h2>
+          <span id="kioskItemCount">1 Item</span>
         </div>
         
-        <div class="cartItemList" id="cartItemList"></div>
+        <!-- ITEMISED MCDO KIOSK ORDER LIST -->
+        <div class="kioskItemList" id="kioskItemList">
+          <!-- Dynamic Items inserted here -->
+        </div>
 
-        <div class="sumrow"><span>Base Pizza</span><strong id="basePrice">₱299.00</strong></div>
-        <div class="sumrow"><span>Toppings & Extras</span><strong id="extrasPrice">₱0.00</strong></div>
+        <div class="sumrow"><span>Base Pizza (<span id="pizzaSizeText">Medium</span>)</span><strong id="basePrice">₱299.00</strong></div>
+        <div class="sumrow"><span>Toppings Total</span><strong id="extrasPrice">₱0.00</strong></div>
         <div class="sumrow"><span>Delivery Fee</span><strong id="deliveryFeePrice">₱45.00</strong></div>
         <div class="sumrow total"><span>Total Amount</span><strong id="subtotal">₱344.00</strong></div>
 
@@ -402,7 +413,7 @@ body.authLocked footer{display:none!important}
     </div>
   </div>
 
-  <!-- PAGE 2: LIVE TRACKING (PURE TEXT ONLY) -->
+  <!-- PAGE 2: LIVE TRACKING (ZERO IMAGES - CLEAN TEXT ONLY) -->
   <section id="checkoutSection" class="hidden">
     <div class="sectionHead">
       <div>
@@ -416,19 +427,32 @@ body.authLocked footer{display:none!important}
       <div>
         <div class="card" style="margin-bottom:20px;">
           <h3 style="margin:0 0 15px;font-size:17px;">Order Progress Status</h3>
-          <div class="trackerSteps">
-            <div class="trackerProgress"></div>
-            <div class="tStep done"><div class="tDot">✓</div><div class="tStepLabel">Order Placed</div></div>
-            <div class="tStep active"><div class="tDot">2</div><div class="tStepLabel">On the way</div></div>
-            <div class="tStep"><div class="tDot">3</div><div class="tStepLabel">Delivered</div></div>
+          
+          <!-- PURE TEXT BOXES ONLY (ZERO IMAGES, ZERO CIRCLES) -->
+          <div class="pureTextStatusList">
+            <div class="statusBox done">
+              <span class="statusState">Completed</span>
+              <span class="statusName">Order Placed</span>
+            </div>
+
+            <div class="statusBox active">
+              <span class="statusState">In Progress</span>
+              <span class="statusName">On the way</span>
+            </div>
+
+            <div class="statusBox">
+              <span class="statusState">Pending</span>
+              <span class="statusName">Delivered</span>
+            </div>
           </div>
+
           <div style="background:#f8fafc;padding:12px 16px;border-radius:12px;border:1px solid #e2e8f0;font-size:14px;color:#475569;">
             Estimated Arrival: <strong style="color:var(--dark);" id="estDeliveryTime">20–35 mins</strong>
           </div>
         </div>
 
         <div class="card">
-          <h3 style="margin:0;font-size:17px;">Delivery Address</h3>
+          <h3 style="margin:0;font-size:17px;">Delivery Address Detail</h3>
           <div class="addressBox" id="mapLocationLabel">Address loading...</div>
         </div>
       </div>
@@ -513,32 +537,59 @@ function readOrder(){
     fee,
     extrasSum,
     total,
-    allToppings: allSelectedToppings.map(t => ({ name: t.value, price: Number(t.dataset.price) }))
+    allToppings: allSelectedToppings.map(t => ({ id: t.id, name: t.value, price: Number(t.dataset.price) }))
   };
+}
+
+function removeTopping(id){
+  const el = document.getElementById(id);
+  if(el){
+    el.checked = false;
+    updatePizzaCart();
+  }
 }
 
 function updatePizzaCart(){
   const o = readOrder();
   
-  document.getElementById("pizzaSize").textContent = o.sizeLabel;
+  document.getElementById("pizzaSizeText").textContent = o.sizeLabel;
   document.getElementById("basePrice").textContent = peso(o.base);
   document.getElementById("extrasPrice").textContent = peso(o.extrasSum);
   document.getElementById("deliveryFeePrice").textContent = peso(o.fee);
   document.getElementById("subtotal").textContent = peso(o.total);
 
-  const cartListContainer = document.getElementById("cartItemList");
-  let itemsHTML = `<div class="cartItemRow"><span class="name">1x ${o.sizeLabel} Pizza Crust</span><span class="amt">${peso(o.base)}</span></div>`;
+  const kioskList = document.getElementById("kioskItemList");
+  
+  let itemsHTML = `
+    <div class="kioskItem">
+      <span class="qty">1x</span>
+      <div class="details">
+        <span class="name">${o.sizeLabel} Pizza Crust</span>
+      </div>
+      <span class="cost">${peso(o.base)}</span>
+    </div>
+  `;
 
   if(o.allToppings.length > 0){
     o.allToppings.forEach(item => {
-      itemsHTML += `<div class="cartItemRow"><span class="name">+ ${item.name}</span><span class="amt">${peso(item.price)}</span></div>`;
+      itemsHTML += `
+        <div class="kioskItem">
+          <span class="qty">1x</span>
+          <div class="details">
+            <span class="name">+ ${item.name}</span>
+          </div>
+          <span class="cost">${peso(item.price)}</span>
+          <button class="removeBtn" title="Remove item" onclick="removeTopping('${item.id}')">✕</button>
+        </div>
+      `;
     });
-  } else {
-    itemsHTML += `<div style="padding:10px 0;color:var(--muted);font-size:13px;text-align:center;">No extra toppings selected</div>`;
   }
 
-  cartListContainer.innerHTML = itemsHTML;
-  document.getElementById("cartCount").textContent = o.allToppings.length + 1;
+  kioskList.innerHTML = itemsHTML;
+  
+  const count = o.allToppings.length + 1;
+  document.getElementById("cartCount").textContent = count;
+  document.getElementById("kioskItemCount").textContent = `${count} ${count === 1 ? 'Item' : 'Items'}`;
 
   store.set("activeOrder", o);
 }
