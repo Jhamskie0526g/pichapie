@@ -565,7 +565,7 @@ function updatePizzaCart(){
   const kioskList = document.getElementById("kioskItemList");
   
   if(o.globalPizzaQty === 0){
-    kioskList.innerHTML = `<div style="text-align:center;color:var(--muted);padding:20px;font-weight:700;">Wala pang napipiling pizza sa cart. Pindutin ang - / + sa ibaba o mag-adjust ng quantity para mag-order!</div>`;
+    kioskList.innerHTML = `<div style="text-align:center;color:var(--muted);padding:20px;font-weight:700;">It's empty</div>`;
   } else {
     let toppingsText = o.toppingsNames.length > 0 ? `(${o.toppingsNames.join(", ")})` : "(Plain Cheese)";
     kioskList.innerHTML = `
@@ -665,7 +665,6 @@ function resetAndOrderAnother(){
   store.remove("placedOrder");
   store.remove("savedReceiptData");
 
-  // Reset all builder choices and make quantity 0 (brand new cart slate)
   document.querySelectorAll('input[type="checkbox"]').forEach(c => c.checked = false);
   globalPizzaQty = 0;
   document.getElementById("medium").checked = true;
@@ -685,8 +684,6 @@ function openOrderApp(userObj){
   document.body.classList.remove("authLocked");
   document.getElementById("authScreen").classList.add("hidden");
 
-  // HINDI na namin binabalik ang lumang resibo/cart sa screen pag-login. 
-  // Naka-save lang ang profile ni user, pero laging fresh/zero ang cart para sa panibagong order!
   globalPizzaQty = 0;
   updatePizzaCart();
 }
@@ -783,7 +780,7 @@ document.getElementById("toCheckout").addEventListener("click", () => {
     return;
   }
   if(globalPizzaQty <= 0){
-    err.textContent = "it's still empty.";
+    err.textContent = "Wala pang laman ang iyong cart. Pumili muna ng pizza.";
     return;
   }
   err.textContent = "";
