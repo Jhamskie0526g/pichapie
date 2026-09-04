@@ -40,6 +40,7 @@ a{text-decoration:none;color:inherit}
 .cartBtn{border:0;background:var(--dark);color:#fff;padding:11px 15px;border-radius:13px;font-weight:850}
 .cartBtn span{background:var(--red);padding:3px 7px;border-radius:99px;margin-left:5px}
 
+/* Single Log Out Button Style */
 .logoutBtn{
   background:#fff;
   color:var(--dark);
@@ -70,12 +71,12 @@ a{text-decoration:none;color:inherit}
 .choiceGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .choice{position:relative}
 .choice input{position:absolute;opacity:0}
-.choice label{display:block;border:1px solid var(--line);padding:14px;border-radius:15px;background:#fff;transition:.2s;height:100%}
+.choice label{display:block;border:1px solid var(--line);padding:14px;border-radius:15px;background:#fff;transition:.2s;height:100%;cursor:pointer}
 .choice input:checked+label{border-color:var(--red);background:#fff3ee;box-shadow:0 0 0 2px rgba(230,57,70,.08)}
 .choice label strong{display:block}
 .choice label small{color:var(--muted);display:block;margin-top:4px}
 .checkGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
-.check{display:flex;align-items:center;gap:9px;border:1px solid var(--line);padding:12px;border-radius:13px;background:#fff}
+.check{display:flex;align-items:center;gap:9px;border:1px solid var(--line);padding:12px;border-radius:13px;background:#fff;cursor:pointer}
 .check input{accent-color:var(--red)}
 .price{color:var(--red);font-weight:850;font-size:13px;margin-left:auto}
 
@@ -96,7 +97,7 @@ textarea{min-height:80px;resize:vertical}
 .err{color:var(--red);font-size:13px;min-height:17px}
 
 .radioList{display:grid;gap:9px}
-.radio{border:1px solid var(--line);padding:12px;border-radius:13px;display:flex;gap:9px;align-items:center;background:#fff}
+.radio{border:1px solid var(--line);padding:12px;border-radius:13px;display:flex;gap:9px;align-items:center;background:#fff;cursor:pointer}
 .radio input{accent-color:var(--red)}
 
 .paymentBox{
@@ -156,27 +157,6 @@ body.authLocked footer{display:none!important}
   overflow:hidden;
 }
 
-.halfPizzaGraphic {
-  position: absolute;
-  top: 50%;
-  right: -130px;
-  transform: translateY(-50%);
-  width: 320px;
-  height: 320px;
-  border-radius: 50%;
-  border: 10px solid #d97706;
-  background: radial-gradient(circle, #ef4444 60%, #f59e0b 85%, #b45309 100%);
-  box-shadow: -10px 0 30px rgba(0,0,0,0.4);
-  pointer-events: none;
-}
-.halfPizzaGraphic::before {
-  content: "🍕";
-  font-size: 140px;
-  position: absolute;
-  top: 20px;
-  left: 20px;
-}
-
 .authIntro h1{font-size:42px;line-height:1.05;margin:0 0 14px;position:relative;z-index:2}
 .authIntro p{opacity:.95;line-height:1.7;position:relative;z-index:2;max-width:280px}
 
@@ -193,7 +173,8 @@ body.authLocked footer{display:none!important}
 .receiptItem{display:flex;justify-content:space-between;gap:15px;margin:9px 0;font-size:14px}.receiptItem span:first-child{color:var(--muted)}
 .receiptTotal{border-top:1px dashed #ccc;margin-top:14px;padding-top:14px;display:flex;justify-content:space-between;font-size:18px;font-weight:900}
 
-.googleMapBox{height:300px;border-radius:18px;overflow:hidden;border:1px solid #cfe0cb;margin-top:10px}
+/* Google Maps Box Styling */
+.googleMapBox{height:320px;border-radius:18px;overflow:hidden;border:1px solid #cfe0cb;margin-top:10px;box-shadow:0 4px 15px rgba(0,0,0,0.05)}
 .googleMapBox iframe{width:100%;height:100%;border:0}
 
 .lastPage{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;margin-top:25px}
@@ -208,7 +189,6 @@ body.authLocked footer{display:none!important}
 }
 @media(max-width:760px){
  .authBox{grid-template-columns:1fr}
- .halfPizzaGraphic{display:none}
  .authIntro{padding:32px}.authIntro h1{font-size:34px}.authFormBox{padding:28px}
 }
 </style>
@@ -219,8 +199,7 @@ body.authLocked footer{display:none!important}
 <section id="authScreen" class="authScreen">
   <div class="authBox">
     <div class="authIntro">
-      <div class="halfPizzaGraphic"></div>
-      <h1>Welcome to<br>Picha Pie</h1>
+      <h1>Welcome to<br>Picha Pie 🍕</h1>
       <p>Make your own pizza, choose your toppings, and track your order!</p>
       <div style="margin-top:18px;font-weight:800;position:relative;z-index:2">🔥 Fresh • Fast • Delicious</div>
     </div>
@@ -247,11 +226,11 @@ body.authLocked footer{display:none!important}
         <button class="primary full" type="submit">Log in →</button>
         <div class="err" id="loginErr"></div>
       </form>
-      <p class="flowNote">Demo website — account details saved in browser.</p>
     </div>
   </div>
 </section>
 
+<!-- NAVIGATION BAR -->
 <header class="topbar">
   <div class="navwrap">
     <a class="brand" href="#build"><div class="logoMark">🍕</div><div><div class="logoText">Picha Pie</div><div class="tagline">Make your own PIZZA!!!</div></div></a>
@@ -261,7 +240,7 @@ body.authLocked footer{display:none!important}
     </nav>
     <div class="navActions">
       <button class="cartBtn" onclick="document.querySelector('#build').scrollIntoView()">🛒 Cart <span id="cartCount">0</span></button>
-      <!-- SIYA NALANG ANG Tanging Log Out Button -->
+      <!-- SINGLE LOG OUT BUTTON IN THE CORNER -->
       <button class="logoutBtn" onclick="logoutUser()">Log Out</button>
     </div>
   </div>
@@ -328,21 +307,22 @@ body.authLocked footer{display:none!important}
               <label class="radio"><input type="radio" name="pay" value="Cash on Delivery" checked onchange="togglePaymentBox()"> Cash on Delivery</label>
               <label class="radio"><input type="radio" name="pay" value="Online Payment" onchange="togglePaymentBox()"> Online Payment</label>
             </div>
-            <!-- Online Payment Details Box -->
+            
+            <!-- ONLINE PAYMENT DETAILS BOX -->
             <div id="onlinePayDetails" class="paymentBox hidden">
               <strong>💳 Online Payment Details:</strong><br>
               Send payment to:<br>
               • <strong>GCash / Maya:</strong> 0969 000 6969 (Picha Pie Store)<br>
               • <strong>Bank (BDO):</strong> 0012 3456 7890<br>
-              <small style="color:var(--muted);">*Please prepare screenshot of transaction upon delivery.</small>
+              <small style="color:var(--muted);">*Please prepare a screenshot of payment upon receipt/delivery.</small>
             </div>
           </div>
         </div>
 
         <div class="step">
           <div class="stepTitle"><div class="num">6</div><h3>Delivery address</h3></div>
-          <label class="field">Address<textarea id="addr" placeholder="Enter your location/address"></textarea></label>
-          <label class="field" style="margin-top:10px">Instructions<textarea id="instr" placeholder="e.g. Leave at the gate"></textarea></label>
+          <label class="field">Address<textarea id="addr" placeholder="Enter your house no., street, subdivision, or barangay"></textarea></label>
+          <label class="field" style="margin-top:10px">Instructions<textarea id="instr" placeholder="e.g. Leave at the gate / Call when nearby"></textarea></label>
         </div>
       </section>
 
@@ -361,9 +341,10 @@ body.authLocked footer{display:none!important}
     </div>
   </div>
 
+  <!-- CHECKOUT / MAP LOCATION PAGE -->
   <section id="checkout" class="hidden">
     <div class="sectionHead">
-      <div><h2>Delivery Location 🚚</h2><p>Here is your delivery address map location.</p></div>
+      <div><h2>Delivery Location 🚚</h2><p>Live interactive Google Map based on your inputted address.</p></div>
       <div style="display:flex;gap:8px">
         <button class="secondary" onclick="goBackToOrder()">← Back to Order</button>
       </div>
@@ -371,9 +352,10 @@ body.authLocked footer{display:none!important}
 
     <div class="lastPage" id="trackingView">
       <div class="card">
-        <h2>📍 Delivery Location Map</h2>
+        <h2>📍 Google Map Location</h2>
         <p style="color:var(--muted)" id="mapLocationLabel">Cubic Homes, Merville, Parañaque Area</p>
         
+        <!-- INTERACTIVE GOOGLE MAP IFRAME -->
         <div class="googleMapBox">
           <iframe 
             id="mapIframe"
@@ -385,7 +367,7 @@ body.authLocked footer{display:none!important}
 
         <div class="step" style="margin-top:20px">
           <div class="stepTitle"><div class="num">✓</div><h3>Delivery details</h3></div>
-          <p id="finalAddress" style="margin:0 0 7px"></p>
+          <p id="finalAddress" style="margin:0 0 7px;font-weight:700;"></p>
           <p id="finalInstructions" style="margin:0;color:var(--muted)"></p>
         </div>
       </div>
@@ -407,7 +389,7 @@ body.authLocked footer{display:none!important}
         </div>
         <div class="success">
           🎉 <strong>Order placed successfully!</strong><br>
-          Your pizza order is now being processed.
+          Your pizza is being prepared and delivered soon.
         </div>
       </div>
     </div>
@@ -421,6 +403,7 @@ body.authLocked footer{display:none!important}
     <div><p>FB: Picha PieOfficial</p><p>© 2026 Picha Pie</p></div>
   </div>
 </footer>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -550,6 +533,7 @@ function renderFinalPage(){
   const receipt=store.get("receipt",null)||makeReceipt();
   store.set("receipt",receipt);
 
+  // Dynamic Google Maps Search base sa in-input na address
   const mapQuery = address ? encodeURIComponent(address) : "Cubic%20Homes,%20Merville,%20Paranaque";
   document.getElementById("mapIframe").src = `https://maps.google.com/maps?q=${mapQuery}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
   document.getElementById("mapLocationLabel").textContent = address || "Cubic Homes, Merville, Parañaque Area";
