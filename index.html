@@ -107,7 +107,7 @@ textarea{min-height:75px;resize:vertical}
 .radio{border:1px solid var(--line);padding:12px 14px;border-radius:13px;display:flex;gap:10px;align-items:center;background:#fff;cursor:pointer;font-size:14px;font-weight:600}
 .radio input{accent-color:var(--red);width:16px;height:16px}
 
-/* QR CODE & PAYMENT BOX */
+/* QR CODE & PAYMENT BOX (STAYS IN BUILDER FORM ONLY) */
 .paymentBox{
   background:#fff0e8;
   border:1px solid #f2cfbd;
@@ -140,10 +140,10 @@ textarea{min-height:75px;resize:vertical}
   text-align:center;
 }
 
-/* TRACKING & HCI STEPPER */
+/* TRACKING & PURE TEXT HCI STEPPER (3 STEPS) */
 .trackingGrid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;margin-top:10px}
 
-.trackerSteps{display:flex;justify-content:space-between;position:relative;margin:25px 10px 30px}
+.trackerSteps{display:flex;justify-content:space-between;position:relative;margin:25px 20px 30px}
 .trackerSteps::before{
   content:'';
   position:absolute;
@@ -158,13 +158,13 @@ textarea{min-height:75px;resize:vertical}
   position:absolute;
   top:18px;
   left:0;
-  width:66%;
+  width:50%;
   height:4px;
   background:var(--green);
   z-index:1;
   transition:width 0.5s ease;
 }
-.tStep{position:relative;z-index:2;text-align:center;background:#fff;padding:0 6px}
+.tStep{position:relative;z-index:2;text-align:center;background:#fff;padding:0 8px}
 .tDot{
   width:36px;
   height:36px;
@@ -186,7 +186,7 @@ textarea{min-height:75px;resize:vertical}
 .googleMapBox{height:340px;border-radius:18px;overflow:hidden;border:1px solid #cfe0cb;margin-top:12px;box-shadow:0 4px 15px rgba(0,0,0,0.06)}
 .googleMapBox iframe{width:100%;height:100%;border:0}
 
-/* RECEIPT DISPLAY */
+/* RECEIPT DISPLAY (CLEAN TEXT ONLY) */
 .receiptCard{background:#fff;border:1px dashed #cbd5e1;border-radius:18px;padding:22px;position:relative}
 .receiptHead{text-align:center;border-bottom:1px dashed #cbd5e1;padding-bottom:15px;margin-bottom:15px}
 .receiptHead h3{margin:0;font-size:22px;letter-spacing:-0.5px}
@@ -313,7 +313,7 @@ body.authLocked footer{display:none!important}
       </div>
     </a>
     <nav class="nav">
-      <a class="active" href="javascript:void(0)" onclick="showBuilderPage()">Order Pizza</a>
+      <a class="active" id="navOrderBtn" href="javascript:void(0)" onclick="showBuilderPage()">Order Pizza</a>
       <a href="javascript:void(0)" id="navTrackingBtn" onclick="tryShowTrackingPage()">Track Order</a>
     </nav>
     <div class="navActions">
@@ -393,12 +393,11 @@ body.authLocked footer{display:none!important}
               <label class="radio"><input type="radio" name="pay" value="Online Payment" onchange="togglePaymentBox()"> Online Payment (GCash / Maya / Bank)</label>
             </div>
             
+            <!-- BANKING & QR DETAILS (RETAINED IN CHECKOUT) -->
             <div id="onlinePayDetails" class="paymentBox hidden">
               <strong>💳 Scan QR Code or Transfer:</strong>
-              
               <div class="qrContainer">
                 <div class="qrBox">
-                  <!-- SVG PURE CODE QR ICON -->
                   <svg width="65" height="65" viewBox="0 0 24 24" fill="none" stroke="#1e293b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><path d="M14 14h3v3h-3z"></path><path d="M18 18h3v3h-3z"></path><path d="M14 18h1v3h-1z"></path></svg>
                 </div>
                 <div>
@@ -419,17 +418,14 @@ body.authLocked footer{display:none!important}
         </div>
       </section>
 
-      <!-- RIGHT SIDEBAR: CART SUMMARY WITH LIST -->
+      <!-- RIGHT SIDEBAR: CART SUMMARY -->
       <aside class="card summary">
         <div class="summaryTop">
           <h2>🛒 Your Order Cart</h2>
           <span id="pizzaSize" style="font-weight:800;color:var(--red);">Medium</span>
         </div>
         
-        <!-- ITEM LIST IN CART -->
-        <div class="cartItemList" id="cartItemList">
-          <!-- Dynamically populated via JavaScript -->
-        </div>
+        <div class="cartItemList" id="cartItemList"></div>
 
         <div class="sumrow"><span>Base Pizza</span><strong id="basePrice">₱299.00</strong></div>
         <div class="sumrow"><span>Toppings & Extras</span><strong id="extrasPrice">₱0.00</strong></div>
@@ -442,7 +438,7 @@ body.authLocked footer{display:none!important}
     </div>
   </div>
 
-  <!-- PAGE 2: LIVE TRACKING & MAP STATUS -->
+  <!-- PAGE 2: LIVE TRACKING & MAP STATUS (PURE TEXT & CLEAN UI) -->
   <section id="checkoutSection" class="hidden">
     <div class="sectionHead">
       <div>
@@ -453,15 +449,13 @@ body.authLocked footer{display:none!important}
     </div>
 
     <div class="trackingGrid">
-      <!-- LEFT: LIVE HCI TRACKER & MAP -->
+      <!-- LEFT: LIVE HCI TRACKER (3 STEPS: Order Placed -> On the way -> Delivered) -->
       <div>
-        <!-- PURE TEXT/CSS STEPPER (HCI PRINCIPLES ALIGNED) -->
         <div class="card" style="margin-bottom:20px;">
           <h3 style="margin:0 0 15px;font-size:17px;">Order Progress Status</h3>
           <div class="trackerSteps">
             <div class="trackerProgress"></div>
-            <div class="tStep done"><div class="tDot">✓</div><div class="tStepLabel">Placed</div></div>
-            <div class="tStep done"><div class="tDot">✓</div><div class="tStepLabel">Baking</div></div>
+            <div class="tStep done"><div class="tDot">✓</div><div class="tStepLabel">Order Placed</div></div>
             <div class="tStep active"><div class="tDot">🛵</div><div class="tStepLabel">On the way</div></div>
             <div class="tStep"><div class="tDot">🏠</div><div class="tStepLabel">Delivered</div></div>
           </div>
@@ -470,7 +464,7 @@ body.authLocked footer{display:none!important}
           </div>
         </div>
 
-        <!-- LIVE GOOGLE MAP -->
+        <!-- GOOGLE MAP FOR DELIVERY ADDRESS -->
         <div class="card">
           <h3 style="margin:0;font-size:17px;">📍 Delivery Location Address Map</h3>
           <p style="color:var(--muted);font-size:13px;margin:4px 0 0;" id="mapLocationLabel">Address map loading...</p>
@@ -485,7 +479,7 @@ body.authLocked footer{display:none!important}
         </div>
       </div>
 
-      <!-- RIGHT: FINAL RECEIPT & SUMMARY -->
+      <!-- RIGHT: FINAL RECEIPT (NO BANKING DETAILS HERE) -->
       <div class="card">
         <div class="receiptCard">
           <div class="receiptHead">
@@ -543,7 +537,6 @@ function showToast(msg){
   setTimeout(() => t.classList.remove("show"), 2800);
 }
 
-/* READ ORDER DATA & UPDATE CART LIST */
 function readOrder(){
   const size = document.querySelector('input[name="size"]:checked');
   const meats = [...document.querySelectorAll('input[name="meat"]:checked')];
@@ -565,14 +558,10 @@ function readOrder(){
     fee,
     extrasSum,
     total,
-    meats: meats.map(m => ({ name: m.value, price: Number(m.dataset.price) })),
-    vegs: vegs.map(v => ({ name: v.value, price: Number(v.dataset.price) })),
-    addons: addons.map(a => ({ name: a.value, price: Number(a.dataset.price) })),
     allToppings: allSelectedToppings.map(t => ({ name: t.value, price: Number(t.dataset.price) }))
   };
 }
 
-/* LIVE UPDATE CART SIDEBAR */
 function updatePizzaCart(){
   const o = readOrder();
   
@@ -609,15 +598,16 @@ function togglePaymentBox(){
   }
 }
 
-/* PAGE SWITCHING */
+/* NAVBAR TOGGLES */
 function showBuilderPage(){
   document.getElementById("builderSection").classList.remove("hidden");
   document.getElementById("checkoutSection").classList.add("hidden");
+  document.getElementById("navOrderBtn").classList.add("active");
+  document.getElementById("navTrackingBtn").classList.remove("active");
   window.scrollTo({top:0, behavior:"smooth"});
 }
 
 function tryShowTrackingPage(){
-  const savedOrder = store.get("activeOrder", null);
   const address = document.getElementById("addr").value.trim();
   if(!address && !store.get("placedOrder", null)){
     showToast("Please build an order & enter your address first!");
@@ -625,6 +615,8 @@ function tryShowTrackingPage(){
   }
   document.getElementById("builderSection").classList.add("hidden");
   document.getElementById("checkoutSection").classList.remove("hidden");
+  document.getElementById("navOrderBtn").classList.remove("active");
+  document.getElementById("navTrackingBtn").classList.add("active");
   window.scrollTo({top:0, behavior:"smooth"});
 }
 
@@ -643,7 +635,6 @@ function logoutUser(){
   }
 }
 
-/* EVENT LISTENERS FOR FORM INPUTS */
 document.querySelectorAll('input[name="size"],input[name="meat"],input[name="veg"],input[name="addon"],input[name="slot"]').forEach(x => {
   x.addEventListener("change", updatePizzaCart);
 });
@@ -696,7 +687,7 @@ function generateReceiptNum(){
   return `PCH-${Math.floor(Math.random()*899999 + 100000)}`;
 }
 
-/* CHECKOUT ACTION -> TRANSITION TO WAITING MAP TRACKING */
+/* CHECKOUT ACTION -> TRANSITIONS BUTTON & VIEW TO TRACK ORDER */
 document.getElementById("toCheckout").addEventListener("click", () => {
   const addr = document.getElementById("addr").value.trim();
   const err = document.getElementById("checkoutErr");
@@ -712,7 +703,7 @@ document.getElementById("toCheckout").addEventListener("click", () => {
   store.set("receiptNo", receiptNo);
   store.set("placedOrder", true);
 
-  // Update Tracking & Receipt View
+  // Update Receipt Text
   document.getElementById("receiptNo").textContent = receiptNo;
   document.getElementById("receiptDate").textContent = new Date().toLocaleString("en-PH", {dateStyle:"medium", timeStyle:"short"});
   document.getElementById("receiptPay").textContent = pay;
@@ -724,23 +715,25 @@ document.getElementById("toCheckout").addEventListener("click", () => {
   document.getElementById("receiptFee").textContent = peso(o.fee);
   document.getElementById("receiptTotal").textContent = peso(o.total);
 
-  // Populate Items list in Receipt
   let receiptItemsHTML = `<div class="receiptItem"><span>${o.sizeLabel} Crust</span><strong>${peso(o.base)}</strong></div>`;
   o.allToppings.forEach(t => {
     receiptItemsHTML += `<div class="receiptItem"><span>+ ${t.name}</span><strong>${peso(t.price)}</strong></div>`;
   });
   document.getElementById("receiptItems").innerHTML = receiptItemsHTML;
 
-  // Embed Google Maps Address
+  // Google Maps Frame
   const mapQuery = encodeURIComponent(addr);
   document.getElementById("mapIframe").src = `https://maps.google.com/maps?q=${mapQuery}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
   document.getElementById("mapLocationLabel").textContent = "📍 " + addr;
 
-  // Switch View
+  // AUTOMATIC SWITCH TO TRACK ORDER PAGE & HIGHLIGHT NAV BUTTON
   document.getElementById("builderSection").classList.add("hidden");
   document.getElementById("checkoutSection").classList.remove("hidden");
+  document.getElementById("navOrderBtn").classList.remove("active");
+  document.getElementById("navTrackingBtn").classList.add("active");
+  
   window.scrollTo({top:0, behavior:"smooth"});
-  showToast("🛵 Order placed! Your delivery is being prepared.");
+  showToast("🛵 Order placed! Track your order below.");
 });
 
 document.body.classList.add("authLocked");
